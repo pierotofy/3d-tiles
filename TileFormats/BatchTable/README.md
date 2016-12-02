@@ -150,6 +150,12 @@ var cartographicArray = new Float64Array(batchTableBinary.buffer, byteOffset, ca
 var cartographicOfFeature = positionArray.subarray(batchId * numberOfComponents, batchId * numberOfComponents + numberOfComponents); // Using subarray creates a view into the array, and not a new array.
 ```
 
+## Hierarchy
+
+The standard batch table approach may not be suitable for representing metadata hierarchies. Often a large amount of duplicate data is needed describing hierarchical metadata. tiles that  metadata hierarchies.
+
+  a hierarchical representation of metadata wil
+
 ## Implementation Notes
 
 In JavaScript, a `TypedArray` cannot be created on data unless it is byte-aligned to the data type.
