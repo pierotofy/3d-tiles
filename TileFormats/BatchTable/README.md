@@ -152,9 +152,41 @@ var cartographicOfFeature = positionArray.subarray(batchId * numberOfComponents,
 
 ## Hierarchy
 
-The standard batch table approach may not be suitable for representing metadata hierarchies. Often a large amount of duplicate data is needed describing hierarchical metadata. tiles that  metadata hierarchies.
+The standard batch table approach may not be suitable for representing metadata hierarchies.
 
-  a hierarchical representation of metadata wil
+For example consider a tile that represents a city block where the doors, walls, and roofs contain metadata,
+the buildings contain metadata, and the block contains metadata. In order to select a door and get information
+about itself, its building, and its block the three-level hierarchy must be flattened into the door's properties.
+Additionally all features in the batch table - doors, walls, and roofs - must share the same property arrays even if they do not apply to all features.
+This approach incurs a high storage cost due to the amount of duplicate data.
+
+An example of this with three buildings setup might look like:
+
+{
+    door_material : ['oak', 'plastic', 'stone', '', '', '', '']
+    mass : [10, 11, 14,
+}
+
+The batch table hierarchy remedies this by treating each feature as an instance of a class. Each class contains the metadata for its instances alone.
+Instances may have any number of parents to build the semantic hierarchy.
+
+{
+    material : 'Oak',
+
+}
+This three-level hierarchy must be flattened
+into each feature, incurring
+
+
+For example, consider a tile that contains buildings, where each building is composed of a set of features like doors and walls.
+
+
+
+Metadata must be flattened into each feature in a way
+that generates a large amount of duplicate data and incurs a high storage cost.
+
+Often a large amount of duplicate data is needed describing hierarchical metadata. tiles that  metadata hierarchies.
+
 
 ## Implementation Notes
 
